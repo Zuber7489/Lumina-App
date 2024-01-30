@@ -1,0 +1,7 @@
+{
+  "name": "Lumina",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

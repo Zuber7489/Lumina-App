@@ -1,0 +1,72 @@
+<ion-menu contentId="main-content" >
+  <ion-header >
+    <ion-toolbar color="dark">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item >
+        <ion-icon slot="start" style="color: yellow;" name="mail"></ion-icon>
+        <ion-label style="color: white;">{{this.email}}</ion-label>
+      </ion-item>
+
+      <ion-item (click)="clearChatHistory()">
+        <ion-icon slot="start" style="color: red;" name="trash"  ></ion-icon>
+        <ion-label style="color: white; cursor: pointer;" >Clear Chat History</ion-label>
+      </ion-item>
+
+      <ion-item (click)="logout()">
+        <ion-icon slot="start" style="color: red;" name="log-out"></ion-icon>
+        <ion-label style="color: white;">Logout</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Lumina</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <div class="chat-container">
+    <div class="chat-messages">
+  <!-- Display chat history -->
+  <div *ngFor="let message of chatHistory" class="message-container">
+    <div *ngIf="message.type === 'user'" class="user-message">
+      <ion-icon slot="start" name="person-circle" size="large" color="warning"></ion-icon>
+      <div class="message-text">{{ message.text }}</div>
+    </div>
+    <div *ngIf="message.type === 'bot'" class="bot-message">
+      <ion-icon slot="start" name="logo-android" size="large"></ion-icon>
+      <div class="message-text" [innerHTML]="formatMessageText(message.text)">
+        <ion-button (click)="speakText()" fill="clear">
+          <ion-icon name="volume-high"></ion-icon>
+        </ion-button>
+      </div>
+      
+    
+    </div>
+  </div>
+    </div>
+    <div class="input-container fixed-bottom">
+      
+      <ion-textarea placeholder="Type your Query" [(ngModel)]="inputText" clearInput></ion-textarea>
+      <ion-button *ngIf="!isListening" fill="clear" class="mic-button" (click)="startRecognition()">
+        <ion-icon name="mic"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isListening" fill="clear" class="mic-button" (click)="stopRecognition()">
+        <ion-icon name="pause-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button  fill="clear" class="send-button" (click)="onSubmit()">
+        <ion-spinner *ngIf="isLoading" name="crescent" color="warning"></ion-spinner>
+        <ion-icon *ngIf="!isLoading" name="arrow-up"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
