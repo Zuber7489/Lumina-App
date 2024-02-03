@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
 
+
 @NgModule({
   declarations: [AppComponent,HomeComponent,LoginComponent,SignupComponent],
   imports: [   AngularFireModule.initializeApp(environment.firebaseConfig),

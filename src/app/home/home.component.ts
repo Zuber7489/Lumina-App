@@ -116,10 +116,11 @@ chatHistory: { type: string, text: string }[] = [];
  
 
 
-  onCopyClick() {
-    if (this.outputText) {
+  onCopyClick(index:number) {
+    const responseToCopy = this.chatHistory[index]?.text;
+    if (responseToCopy) {
       const textarea = document.createElement('textarea');
-      textarea.value = this.outputText;
+      textarea.value = responseToCopy;
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand('copy');
@@ -128,13 +129,29 @@ chatHistory: { type: string, text: string }[] = [];
       setTimeout(() => (this.isCopied = false), 2000);
     }
   }
+  
+  isVoicePlaying: boolean = false;
+  activeIndex: number = -1;
+  speakText(index: number) {
+    const responseToCopy = this.chatHistory[index]?.text;
 
-
-speakText(){
-  TextToSpeech.speak({
-    text:this.outputText
-  })
-}
+    if (this.isVoicePlaying && this.activeIndex === index) {
+      // If playing, stop speaking
+      TextToSpeech.stop();
+      this.isVoicePlaying = false;
+      this.activeIndex = -1;
+    } else {
+      // If not playing or a different button is clicked, start speaking
+      TextToSpeech.speak({
+        text: responseToCopy,
+      });
+      this.isVoicePlaying = true;
+      this.activeIndex = index;
+    }
+  }
+  isActiveButton(index: number): boolean {
+    return this.isVoicePlaying && this.activeIndex === index;
+  }
 
 
   
@@ -195,5 +212,8 @@ formatMessageText(text: string): string {
 
   return formattedText;
 }
+
+
+
 
 }

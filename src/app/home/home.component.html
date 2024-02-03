@@ -37,36 +37,42 @@
   <div class="chat-container">
     <div class="chat-messages">
   <!-- Display chat history -->
-  <div *ngFor="let message of chatHistory" class="message-container">
+  <div *ngFor="let message of chatHistory; let i = index" class="message-container">
     <div *ngIf="message.type === 'user'" class="user-message">
       <ion-icon slot="start" name="person-circle" size="large" color="warning"></ion-icon>
       <div class="message-text">{{ message.text }}</div>
     </div>
     <div *ngIf="message.type === 'bot'" class="bot-message">
-      <ion-icon slot="start" name="logo-android" size="large"></ion-icon>
-      <div class="message-text" [innerHTML]="formatMessageText(message.text)">
-        <ion-button (click)="speakText()" fill="clear">
-          <ion-icon name="volume-high"></ion-icon>
-        </ion-button>
-      </div>
       
-    
+      <div class="message-text" [innerHTML]="formatMessageText(message.text)"></div>
     </div>
+    <div *ngIf="message.type === 'bot'" class="ml-3"> 
+      <ion-button [color]="isActiveButton(i) ? 'danger' : 'primary'" (click)="speakText(i)">
+        <ion-icon slot="start"  [name]="isVoicePlaying && isActiveButton(i) ? 'pause' : 'volume-high'"></ion-icon>
+        {{ isVoicePlaying && isActiveButton(i) ? 'Stop' : 'Listen' }}
+      </ion-button>
+   <ion-button (click)="onCopyClick(i)" color="success">
+    <ion-icon slot="start" name="copy"></ion-icon>
+    Copy
+   </ion-button>
   </div>
+  </div>
+  
     </div>
     <div class="input-container fixed-bottom">
       
       <ion-textarea placeholder="Type your Query" [(ngModel)]="inputText" clearInput></ion-textarea>
-      <ion-button *ngIf="!isListening" fill="clear" class="mic-button" (click)="startRecognition()">
+      
+      <ion-button  fill="clear" class="mic-button" (click)="startRecognition()">
         <ion-icon name="mic"></ion-icon>
       </ion-button>
-      <ion-button *ngIf="isListening" fill="clear" class="mic-button" (click)="stopRecognition()">
-        <ion-icon name="pause-circle-outline"></ion-icon>
-      </ion-button>
+      
       <ion-button  fill="clear" class="send-button" (click)="onSubmit()">
         <ion-spinner *ngIf="isLoading" name="crescent" color="warning"></ion-spinner>
         <ion-icon *ngIf="!isLoading" name="arrow-up"></ion-icon>
       </ion-button>
+      <!-- <input type="file" id="upload_file" name=""> -->
     </div>
   </div>
+
 </ion-content>

@@ -34,11 +34,22 @@ height: 100%;
 font-family: 'Numans', sans-serif;
 }
 
+
 pre.code-block {
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Apply styles only on mobile devices */
+@media only screen and (max-width: 767px) {
+  pre.code-block div {
+    margin: 4px, 4px;
+    padding: 4px;
     
-    color: black;
-    padding: 10px;
-    border-radius: 5px;
+    width: 300px;
     overflow-x: auto;
+    
     white-space: nowrap;
   }
+}
