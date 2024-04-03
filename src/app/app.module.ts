@@ -12,13 +12,15 @@ import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 
 @NgModule({
   declarations: [AppComponent,HomeComponent,LoginComponent,SignupComponent],
   imports: [   AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,FormsModule,ReactiveFormsModule],
+    AngularFireAuthModule,BrowserModule, CommonModule,
+    BrowserAnimationsModule,IonicModule.forRoot(), AppRoutingModule,HttpClientModule,FormsModule,ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

@@ -1,4 +1,4 @@
-package io.ionic.lumina;
+package io.ionic.zuber;
 
 import com.getcapacitor.BridgeActivity;
 
