@@ -29,7 +29,7 @@ export class LoginComponent  implements OnInit {
         .then(() => {
           console.log('Auto-login successful');
           this.presentToast('Auto-login successful', 'success');
-          this.router.navigate(['home']);
+          this.router.navigate(['avatar']);
         })
         .catch(error => {
           console.error('Auto-login error', error);
@@ -51,7 +51,7 @@ export class LoginComponent  implements OnInit {
     localStorage.setItem('loggedInUserEmail', email);
     localStorage.setItem('loggedInUserPassword', password);
       await this.presentToast('Login successful', 'success');
-      this.router.navigate(['home']); // Replace '/home' with the actual route you want to navigate to
+      this.router.navigate(['avatar']); // Replace '/avatar' with the actual route you want to navigate to
     } catch (error) {
       await this.presentToast('Please Enter Correct Login Email or Password', 'danger');
       console.error('Login error', error);
@@ -67,7 +67,7 @@ export class LoginComponent  implements OnInit {
     this.authService.loginWithGoogle().then((userCredential) => {
       // Handle login success
       console.log(userCredential.user);
-      this.router.navigate(['home']);
+      this.router.navigate(['avatar']);
     })
     .catch((error) => {
       // Handle login error

@@ -14,13 +14,15 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { AvatarComponent } from './avatar/avatar.component';
+import { SitepalAngularModule } from 'sitepal-angular';
 
 
 @NgModule({
-  declarations: [AppComponent,HomeComponent,LoginComponent,SignupComponent],
+  declarations: [AppComponent,HomeComponent,LoginComponent,SignupComponent,AvatarComponent],
   imports: [   AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,BrowserModule, CommonModule,
-    BrowserAnimationsModule,IonicModule.forRoot(), AppRoutingModule,HttpClientModule,FormsModule,ReactiveFormsModule],
+    BrowserAnimationsModule,IonicModule.forRoot(), AppRoutingModule,HttpClientModule,FormsModule,ReactiveFormsModule,SitepalAngularModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

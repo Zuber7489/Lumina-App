@@ -1,0 +1,20 @@
+<div class="scrollable-container">
+    <div class="center-container">
+      <app-sitepal-angular  [embed] ={embed}> </app-sitepal-angular>                                                        
+    </div>
+    <form style="display: none;" action="#" name="messageForm" ><textarea cols="45" rows="16" name="message" class="feature_entire_heading" readonly="" ></textarea></form>
+    <div class="input-container fixed-bottom">
+      
+      <ion-textarea placeholder="Type your Query" [(ngModel)]="inputText" clearInput></ion-textarea>
+      
+      <ion-button  fill="clear" class="mic-button" (click)="startRecognition()">
+        <ion-icon name="mic"></ion-icon>
+      </ion-button>
+      
+      <ion-button  fill="clear" class="send-button" (click)="onSubmit()">
+        <ion-spinner *ngIf="isLoading" name="crescent" color="warning"></ion-spinner>
+        <ion-icon *ngIf="!isLoading" name="arrow-up"></ion-icon>
+      </ion-button>
+      <!-- <input type="file" id="upload_file" name=""> -->
+    </div>
+</div>
