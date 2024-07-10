@@ -15,9 +15,16 @@ export class AvatarComponent  {
   outputText='';
   isLoading = false;
   isListening: boolean = false;
+  email:any;
+  chatHistory: { type: string, text: string }[] = [];
   constructor( private cdRef: ChangeDetectorRef, private renderer: Renderer2,public router:Router,public geminiService:GeminiServiceService,public actionSheetController: ActionSheetController) {
     SpeechRecognition.requestPermission();
   }
+
+ngOnInit(){
+  this.email=localStorage.getItem('loggedInUserEmail')  
+}
+
   sayAudioFn(sayAudioExample){
 	
     globalThis.sayAudio('sayAudioExample');
@@ -27,7 +34,7 @@ export class AvatarComponent  {
     globalThis.sayText(text,ip1,ip2,ip3);
   }
   
-   embed=[3432155,600,800,"''",1,1,2722664,0,1,1,"'WSGmJ3ScqO8d4Zop1cuILz7q4In5k6q2'",0];
+   embed=[3432155,470,800,"''",1,1,2722664,0,1,1,"'WSGmJ3ScqO8d4Zop1cuILz7q4In5k6q2'",0];
 
 
 async onSubmit() {
@@ -78,4 +85,42 @@ if(this.outputText){
     await SpeechRecognition.stop();
     this.cdRef.detectChanges();
   }
+
+
+  
+logout(){
+  localStorage.removeItem('loggedInUserEmail');
+  localStorage.removeItem('loggedInUserPassword'); 
+  this.router.navigate(['login']) 
+}
+
+
+
+async clearChatHistory() {
+  const actionSheet = await this.actionSheetController.create({
+    header: 'Clear Chat History',
+    cssClass: 'my-custom-class',
+    buttons: [
+      {
+        text: 'Confirm',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          this.chatHistory = [];
+          localStorage.removeItem('chatHistory');
+        }
+      },
+      {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }
+    ]
+  });
+  await actionSheet.present();
+}
+
 }
