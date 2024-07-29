@@ -122,5 +122,7 @@ async clearChatHistory() {
   });
   await actionSheet.present();
 }
-
+goToHome(){
+  this.router.navigate(['home'])
+}
 }

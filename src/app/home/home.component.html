@@ -15,11 +15,15 @@
         <ion-icon slot="start" style="color: red;" name="trash"  ></ion-icon>
         <ion-label style="color: white; cursor: pointer;" >Clear Chat History</ion-label>
       </ion-item>
-
+      <ion-item (click)="goToAvatarPage()">
+        <ion-icon slot="start" style="color: green;" name="log-out"></ion-icon>
+        <ion-label style="color: white;">Talk to Avatar</ion-label>
+      </ion-item>
       <ion-item (click)="logout()">
         <ion-icon slot="start" style="color: red;" name="log-out"></ion-icon>
         <ion-label style="color: white;">Logout</ion-label>
       </ion-item>
+    
     </ion-list>
   </ion-content>
 </ion-menu>

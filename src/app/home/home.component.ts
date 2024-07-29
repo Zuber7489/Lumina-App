@@ -213,6 +213,9 @@ formatMessageText(text: string): string {
   return formattedText;
 }
 
+goToAvatarPage(){
+  this.router.navigate(['avatar'])
+}
 
 
 
